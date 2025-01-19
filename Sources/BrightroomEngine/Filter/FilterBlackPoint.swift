@@ -19,12 +19,13 @@ public struct FilterBlackPoint : Filtering, Equatable, Codable {
   }
   
   public func apply(to image: CIImage, sourceImage: CIImage) -> CIImage {
+    let adjustedColor = CIColor(red: value, green: value, blue: value)
     return
       image
         .applyingFilter(
           "CIWhitePointAdjust",
           parameters: [
-            kCIInputEVKey: value as AnyObject
+            "inputColor": adjustedColor
           ]
     )
   }
