@@ -14,6 +14,8 @@ public struct FilterBrilliance: Filtering, Equatable, Codable {
     public init() {}
     
     public func apply(to image: CIImage, sourceImage: CIImage) -> CIImage {
+        let highlightAmount = min(max(Float(value), 0), 1) // Clamping value to [0, 1]
+        let shadowAmount = min(max(Float(-value), 0), 1)
         // First, apply the exposure adjustment
         let exposureAdjusted = image.applyingFilter(
             "CIExposureAdjust",
@@ -26,8 +28,9 @@ public struct FilterBrilliance: Filtering, Equatable, Codable {
         return exposureAdjusted.applyingFilter(
             "CIHighlightShadowAdjust",
             parameters: [
-                "inputRadius": 0.5 as AnyObject, // Adjust the radius of the brilliance effect
-                "inputBrightness": value as AnyObject // Apply the brilliance brightness
+                "inputHighlightAmount": highlightAmount as AnyObject, // Increase highlights
+                "inputShadowAmount": shadowAmount as AnyObject, // Decrease shadows
+                "inputRadius": 0.5 as AnyObject // Set radius, can tweak as needed
             ]
         )
     }
