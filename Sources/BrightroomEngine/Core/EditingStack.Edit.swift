@@ -67,7 +67,7 @@ extension EditingStack {
         public var vibrance: FilterVibrance?
       public var vignette: FilterVignette?
       public var fade: FilterFade?
-
+        public var brilliance: FilterBrilliance?
       public var additionalFilters: [AnyFilter] = []
 
       func makeFilters() -> [AnyFilter] {
@@ -80,6 +80,7 @@ extension EditingStack {
             preset?.asAny(),
 
             // Before
+            brilliance?.asAny(),
             blackPoint?.asAny(),
             vibrance?.asAny(),
             exposure?.asAny(),
