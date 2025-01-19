@@ -63,7 +63,7 @@ extension EditingStack {
       public var sharpen: FilterSharpen?
       public var gaussianBlur: FilterGaussianBlur?
       public var unsharpMask: FilterUnsharpMask?
-      
+      public var blackPoint: FilterBlackPoint?
       public var vignette: FilterVignette?
       public var fade: FilterFade?
 
@@ -79,6 +79,8 @@ extension EditingStack {
             preset?.asAny(),
 
             // Before
+            blackPoint?.asAny(),
+            
             exposure?.asAny(),
             brightness?.asAny(),
             temperature?.asAny(),
